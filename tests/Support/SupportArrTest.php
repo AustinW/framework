@@ -1309,4 +1309,44 @@ class SupportArrTest extends TestCase
             ],
         ], Arr::select($array, 'name'));
     }
+
+    public function testFromCsv()
+    {
+        $csvString = 'apple, banana, orange';
+        $expectedArray = ['apple', 'banana', 'orange'];
+
+        $result = Arr::fromCsv($csvString);
+
+        $this->assertEquals($expectedArray, $result);
+    }
+
+    public function testFromCsvWithCustomDelimiter()
+    {
+        $csvString = 'apple;banana;orange';
+        $expectedArray = ['apple', 'banana', 'orange'];
+
+        $result = Arr::fromCsv($csvString, ';');
+
+        $this->assertEquals($expectedArray, $result);
+    }
+
+    public function testToCsv()
+    {
+        $array = ['apple', 'banana', 'orange'];
+        $expectedCsvString = 'apple,banana,orange';
+
+        $result = Arr::toCsv($array);
+
+        $this->assertEquals($expectedCsvString, $result);
+    }
+
+    public function testToCsvWithCustomDelimiter()
+    {
+        $array = ['apple', 'banana', 'orange'];
+        $expectedCsvString = 'apple;banana;orange';
+
+        $result = Arr::toCsv($array, ';');
+
+        $this->assertEquals($expectedCsvString, $result);
+    }
 }
